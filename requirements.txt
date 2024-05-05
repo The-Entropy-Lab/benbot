@@ -1,0 +1,8 @@
+captcha
+chromadb
+discord.py
+pydantic
+python-dotenv
+streamlit
+tinydb
+together
