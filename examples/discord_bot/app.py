@@ -18,6 +18,7 @@ CHAT_LIMIT = int(os.getenv("CHAT_LIMIT", 20))
 DISCORD_PRIVATE_CHANNEL_ID = int(os.getenv("DISCORD_PRIVATE_CHANNEL_ID",0))
 SYSTEM_MESSAGE = os.getenv("SYSTEM_MESSAGE", "You are a helpful assistant.")
 LTM_SYSTEM_MESSAGE = os.getenv("LTM_SYSTEM_MESSAGE", "Summarize the conversation.")
+DATA_FOLDER = os.getenv("DATA_FOLDER", "_data")
 
 
 def handler(content=None, user=None, db=None, docs=None):
@@ -57,9 +58,9 @@ def handler(content=None, user=None, db=None, docs=None):
 
 
 def main():
-    db = TinyDB(f"_data/db.json")
-    chroma_client = chromadb.PersistentClient(path=f"_data/chroma")
-    docs = chroma_client.get_collection("benbot")
+    db = TinyDB(f"{DATA_FOLDER}/tinydb.json")
+    chroma_client = chromadb.PersistentClient(path=f"{DATA_FOLDER}")
+    docs = chroma_client.get_or_create_collection("benbot")
     intents = discord.Intents.default()
     intents.message_content = True
     intents.members = True

@@ -19,7 +19,12 @@ def run_llm(messages=[], model=os.getenv("LLM_MODEL", "TheBloke/stablelm-zephyr-
     }
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
-    return response.json()["choices"][0]["message"]["content"]
+    
+    try:
+        return response.json()["choices"][0]["message"]["content"]
+    except:
+        print(response.text)
+        return "I'm sorry, something went wrong."
 
 
 # TODO: implement the additional params for llms (temperature, max_tokens, etc.)

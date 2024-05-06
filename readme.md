@@ -52,6 +52,22 @@ user_info = get_user(user='username', db=db)
 update_user(user='username', db=db, messages=[], ltm='Updated long-term memory content')
 ```
 
+### Streamlit - Docker Example
+
+Build the docker image:
+```bash
+docker build . -t benbot
+```
+
+Run the docker image. Be sure to mount a `_data` directory and set the environment variables file:
+``` bash
+docker run \
+  --env-file ./.env \
+  -p 8501:8501 \
+  -v ./_data/streamlit_chat:/home/appuser/_data \
+  benbot
+```
+
 ## Examples
 
 To run the examples, first install BenBot framework as a package from the root directory:

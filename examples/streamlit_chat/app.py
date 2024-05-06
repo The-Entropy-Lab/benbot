@@ -22,10 +22,11 @@ load_dotenv()
 CHAT_LIMIT = int(os.getenv("CHAT_LIMIT", 20))
 LTM_SYSTEM_MESSAGE = os.getenv("LTM_SYSTEM_MESSAGE", "Summarize the conversation.")
 SYSTEM_MESSAGE = os.getenv("SYSTEM_MESSAGE", "You are a helpful assistant.")
+DATA_FOLDER = os.getenv("DATA_FOLDER", "_data")
 
-chroma_client = chromadb.PersistentClient(path=f"_data/chroma")
-db = TinyDB(f"_data/db.json")
-docs = chroma_client.get_collection("benbot")
+chroma_client = chromadb.PersistentClient(path=DATA_FOLDER)
+db = TinyDB(f"{DATA_FOLDER}/tinydb.json")
+docs = chroma_client.get_or_create_collection("default")
 
 # source: https://discuss.streamlit.io/t/streamlit-captcha-integration/38318
 # define the costant
