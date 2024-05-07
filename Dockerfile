@@ -45,9 +45,12 @@ RUN python -m pip install .
 
 # Create a data directory and adjust permissions
 RUN mkdir /home/appuser && chown appuser:appuser /home/appuser
+RUN mkdir /home/appuser/_data && chown appuser:appuser /home/appuser/_data
+#RUN chown appuser:appuser /app/_data
+RUN mkdir /app/_data && chown appuser:appuser /app/_data
 
 # Switch to the non-privileged user to run the application.
-USER appuser
+# USER appuser
 
 # Expose the streamlit port, in case someone's running the streamlit example
 EXPOSE 8501
